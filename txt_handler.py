@@ -1,5 +1,6 @@
 import re
 import os
+import openpyxl
 
 
 def find_data(path):
@@ -36,6 +37,16 @@ def find_data(path):
                             float(isp_mo[1]),
                             float(k_mo[0])])
     return regular
+
+
+def textf_creator(dict):
+    f = open('data.txt', 'w')
+    for k, v in test_dict.items():
+        f.write(str(k) + '\t')
+        for parameter in v:
+            f.write(str(parameter) + '\t')
+        f.write('\n')
+    f.close()
 
 
 if __name__ == "__main__":
