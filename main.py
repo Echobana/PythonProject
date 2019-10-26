@@ -4,6 +4,13 @@ import db_handler
 import txt_handler
 import matplotlib.pyplot as plt
 
+
+def plot_bar(x_data, y_data):
+    fig, ax = plt.subplots()
+    ax.bar(x_data, y_data, color='#4B0082', align='center')
+    plt.show()
+
+
 if __name__ == "__main__":
     engine = A_EngineData(1e6, 55, 7e6, 0, 100)
 
@@ -13,8 +20,8 @@ if __name__ == "__main__":
     # integrating other data to excel file manually
     fd_dict = db_handler.db_creator(r'F:\Elizabeth\FuelData\data.xlsx')  # indata path is changed, ask RD-N1
 
-    for k, v in fd_dict.items():
-        print(k, cta.set_specific_impulseq(engine, v))
+    # for k, v in fd_dict.items():
+    #     print(k, cta.set_specific_impulseq(engine, v))
 
     txt_data_path = r'F:\Elizabeth\FuelData\TxtFiles'
     fuel_data_dictionary = txt_handler.find_data_ground(txt_data_path)
@@ -22,14 +29,13 @@ if __name__ == "__main__":
     # integrating other data to excel file manually
     fd_dict = db_handler.db_creator_ground(
         r'F:\Elizabeth\FuelData\data_ground.xlsx')  # indata path is changed, ask RD-N1
-    print()
-    for k, v in fd_dict.items():
-        print(k, v.beta)
+    # print()
+    # for k, v in fd_dict.items():
+    #     print(k, v.beta)
 
     x_data, y_data = [], []
     for k, v in fd_dict.items():
         x_data.append(k)
         y_data.append(v.i_sp)
-    fig, ax = plt.subplots()
-    ax.bar(x_data, y_data, color='#539caf', align='center')
-    plt.show()
+
+    plot_bar(x_data, y_data)
