@@ -23,5 +23,17 @@ class FuelData(object):
         return self.u_1 * (p / 98066.5) ** self.nu
 
 
+class FuelDataGround(object):
+    def __init__(self, T_c, u_1, nu, density, mu_cp, beta, k, i_sp):
+        self.T_c = T_c
+        self.u_1 = u_1
+        self.nu = nu
+        self.density = density
+        self.beta = beta
+        self.k = k
+        self.i_sp = i_sp
+        self.mu_cp = mu_cp
+
+
 if __name__ == "__main__":
     pass
