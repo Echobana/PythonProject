@@ -15,9 +15,6 @@ class FuelData(object):
         self.a = sqrt(self.k) * (2 / (self.k + 1)) ** ((self.k + 1) / (2 * (self.k - 1)))
         self.beta = sqrt(self.R_c * self.T_c) / self.a
 
-    def u_combustion(self, p):
-        self.u = self.u_1 * (p / 98066.5) ** self.nu
-
 
 class FuelDataGround(FuelData):
     def __init__(self, T_c, u_1, nu, density, mu_cp, k, beta, i_sp):
