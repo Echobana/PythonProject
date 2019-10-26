@@ -13,9 +13,9 @@ heat capacity ratio
 """
 
 
-def textf_creator(test_dict):
+def textf_creator(dictionary):
     f = open('data.txt', 'w')
-    for k, v in test_dict.items():
+    for k, v in dictionary.items():
         f.write(str(k) + '\t')
         for parameter in v:
             f.write(str(parameter) + '\t')
@@ -23,8 +23,8 @@ def textf_creator(test_dict):
     f.close()
 
 
-def xlsx_creator(test_dict):
-    df = pd.DataFrame(test_dict).sort_index(axis=1)
+def xlsx_creator(dictionary):
+    df = pd.DataFrame(dictionary).sort_index(axis=1)
 
     res = pd.concat([df.iloc[:1],
                      pd.DataFrame([[""] * len(df.columns)], columns=df.columns),
