@@ -1,16 +1,15 @@
 import txt_handler
 import pandas as pd
 
-"""
-.xlsx format:
-fuel name
-temperature in combustion chamber
-combustion speed at p = 1 atm
-index in the equation of the law of combustion
-fuel denisty
-сombustion product's molecular mass
-heat capacity ratio
-"""
+
+# Excel file format:
+# fuel name
+# temperature in combustion chamber
+# combustion speed at p = 1 atm
+# index in the equation of the law of combustion
+# fuel density
+# combustion product's molecular mass
+# heat capacity ratio
 
 
 def textf_creator(dictionary):

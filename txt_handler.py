@@ -32,13 +32,13 @@ def find_data(path):
         name_mo = name_regex.findall(k)
         regular.setdefault(name_mo[0],
                            [float(t_mo[0]),  # temperature
-                            8.314/float(rg_mo[0]),  # molecular mass
+                            8.314 / float(rg_mo[0]),  # molecular mass
                             # float(isp_mo[1]),  # specific impulse
                             float(k_mo[0])])  # heat capacity ratio
     return regular
+
 
 if __name__ == "__main__":
     path = r"F:/Elizabeth/FuelData/TxtFiles"
     test_dict = find_data(path)
     print(test_dict)
-
