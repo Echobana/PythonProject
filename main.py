@@ -2,7 +2,6 @@ from tor import TORA
 import db_handler
 import txt_handler
 import matplotlib.pyplot as plt
-from resf import RESF
 
 
 def plot_bar(x, y):

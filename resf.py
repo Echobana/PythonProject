@@ -1,7 +1,4 @@
 from fuel import FuelDataGround
-from fuel import FuelData
-from tor import TORA
-from tor import TOR
 import charachteristics as cta
 
 
