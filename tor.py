@@ -1,31 +1,30 @@
 import gdf_definitions as fdf
 
 
-class TOR(object):
-    def __init__(self, P, t_w, p_c, p_h, p_a, kappa):
+class typeTOR(object):
+    def __init__(self, t_w, p_c, p_h, kappa):
         self.p_c = p_c
-        self.P = P
         self.t_w = t_w
         self.p_h = p_h
-        self.p_a = p_a
         self.kappa = kappa
+
+
+class TOR(typeTOR):
+    def __init__(self, P, t_w, p_c, p_h, p_a, kappa):
+        super().__init__(t_w, p_c, p_h, kappa)
+        self.P = P
+        self.p_a = p_a
 
     def set_la(self, fuel):
         return fdf.find_la_p(fuel.k, self.p_a, self.p_c)
 
 
-class TORA(object):
+class TORA(typeTOR):
     def __init__(self, I_t, t_w, p_c, p_h, f_a, kappa):
+        super().__init__(t_w, p_c, p_h, kappa)
         self.I_t = I_t
-        self.t_w = t_w
-        self.p_c = p_c
-        self.p_h = p_h
         self.f_a = f_a
-        self.kappa = kappa
-        self.thrust = self.set_thrust()
-
-    def set_thrust(self):
-        return self.I_t / self.t_w
+        self.P = self.I_t / self.t_w
 
     def set_la(self, fuel):
         return fdf.find_la_q(fuel.k, 1, self.f_a)
