@@ -25,7 +25,7 @@ def find_data(path):
 
     for k, v in data_dict.items():
         t_mo = t_regex.findall(v)
-        isp_mo = isp_regex.findall(v)
+        # isp_mo = isp_regex.findall(v)
         k_mo = k_regex.findall(v)
         rg_mo = rg_regex.findall(v)
         # z_mo = z_regex.findall(v)
@@ -37,19 +37,8 @@ def find_data(path):
                             float(k_mo[0])])  # heat capacity ratio
     return regular
 
-
-def textf_creator(dict):
-    f = open('data.txt', 'w')
-    for k, v in test_dict.items():
-        f.write(str(k) + '\t')
-        for parameter in v:
-            f.write(str(parameter) + '\t')
-        f.write('\n')
-    f.close()
-
-
 if __name__ == "__main__":
     path = r"F:/Elizabeth/FuelData/TxtFiles"
     test_dict = find_data(path)
     print(test_dict)
-    textf_creator(test_dict)
+

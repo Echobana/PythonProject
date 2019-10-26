@@ -12,10 +12,18 @@ fuel denisty
 heat capacity ratio
 """
 
-if __name__ == '__main__':
-    path = r"F:/Elizabeth/FuelData/TxtFiles"
-    test_dict = txt_handler.find_data(path)
 
+def textf_creator(test_dict):
+    f = open('data.txt', 'w')
+    for k, v in test_dict.items():
+        f.write(str(k) + '\t')
+        for parameter in v:
+            f.write(str(parameter) + '\t')
+        f.write('\n')
+    f.close()
+
+
+def xlsx_creator(test_dict):
     df = pd.DataFrame(test_dict).sort_index(axis=1)
 
     res = pd.concat([df.iloc[:1],
@@ -28,4 +36,9 @@ if __name__ == '__main__':
     res.to_excel("data.xlsx", index=False)
 
 
+if __name__ == '__main__':
+    path = r"F:/Elizabeth/FuelData/TxtFiles"
+    test_dict = txt_handler.find_data(path)
 
+    textf_creator(test_dict)
+    xlsx_creator(test_dict)
