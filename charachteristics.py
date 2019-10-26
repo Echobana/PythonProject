@@ -1,11 +1,9 @@
 import gdf_definitions as fdf
-from fuel import FuelData
-from engine import EngineData
 
 
-def specific_impulse(engine, cfuel):
-    la = fdf.find_la_p(cfuel.k, engine.p_a, engine.p_c)
-    return cfuel.set_beta() * (fdf.impulse(la, cfuel.k) - engine.p_h / engine.p_c) / fdf.mass_flow(la, cfuel.k)
+def set_specific_impulse(engine, fuel):
+    la = fdf.find_la_p(fuel.k, engine.p_a, engine.p_c)
+    return fuel.set_beta() * (fdf.impulse(la, fuel.k) - engine.p_h / engine.p_c) / fdf.mass_flow(la, fuel.k)
 
 
 if __name__ == "__main__":

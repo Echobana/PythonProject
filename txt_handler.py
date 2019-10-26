@@ -39,6 +39,4 @@ def find_data(path):
 
 
 if __name__ == "__main__":
-    path = r"F:/Elizabeth/FuelData/TxtFiles"
-    test_dict = find_data(path)
-    print(test_dict)
+    pass

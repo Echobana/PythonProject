@@ -1,4 +1,3 @@
-import txt_handler
 import pandas as pd
 import numpy as np
 from fuel import FuelData
@@ -47,8 +46,4 @@ def db_creator(path):
 
 
 if __name__ == '__main__':
-    path = r"F:/Elizabeth/FuelData/TxtFiles"
-    test_dict = txt_handler.find_data(path)
-
-    textf_creator(test_dict)
-    xlsx_creator(test_dict)
+    pass

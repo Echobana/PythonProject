@@ -1,4 +1,3 @@
-from gdf_definitions import a_gdf
 from numpy import sqrt
 
 R = 8.314
@@ -25,5 +24,4 @@ class FuelData(object):
 
 
 if __name__ == "__main__":
-    test_fuel = FuelData(2327, 0.7e-3, 0.7, 1700, 1100, 1.18)
-    print(test_fuel.set_a())
+    pass

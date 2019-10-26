@@ -31,7 +31,4 @@ class A_EngineData(object):
 
 
 if __name__ == "__main__":
-    my_engine = A_EngineData(1000, 55, 7, 0, 100)
-    my_fuel = FuelData(2327, 0.7e-3, 0.7, 1800, 1000, 1.19)
-    x = my_engine.set_la(my_fuel)
-    print(x)
+    pass
