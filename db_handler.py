@@ -1,5 +1,7 @@
 import txt_handler
 import pandas as pd
+import numpy as np
+from fuel import FuelData
 
 
 # Excel file format:
@@ -33,6 +35,15 @@ def xlsx_creator(dictionary):
                      ],
                     ignore_index=True)
     res.to_excel("data.xlsx", index=False)
+
+
+def db_creator(path):
+    df = pd.read_excel(path, header=None)
+    df = np.array(df).T
+    fuel_dict = dict()
+    for i in range(len(df)):
+        fuel_dict.setdefault(df[i][0], FuelData(*df[i][1:]))
+    return fuel_dict
 
 
 if __name__ == '__main__':
