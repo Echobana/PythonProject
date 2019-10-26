@@ -2,6 +2,7 @@ from engine import A_EngineData
 import charachteristics as cta
 import db_handler
 import txt_handler
+import matplotlib.pyplot as plt
 
 if __name__ == "__main__":
     engine = A_EngineData(1e6, 55, 7e6, 0, 100)
@@ -25,3 +26,10 @@ if __name__ == "__main__":
     for k, v in fd_dict.items():
         print(k, v.beta)
 
+    x_data, y_data = [], []
+    for k, v in fd_dict.items():
+        x_data.append(k)
+        y_data.append(v.i_sp)
+    fig, ax = plt.subplots()
+    ax.bar(x_data, y_data, color='#539caf', align='center')
+    plt.show()
