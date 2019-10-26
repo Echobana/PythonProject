@@ -1,4 +1,4 @@
-from engine import TORA
+from tor import TORA
 import db_handler
 import txt_handler
 import matplotlib.pyplot as plt
@@ -12,7 +12,7 @@ def plot_bar(x, y):
 
 
 if __name__ == "__main__":
-    engine = TORA(1e6, 55, 7e6, 0, 100)
+    tor = TORA(1e6, 55, 7e6, 0, 100, 100)
 
     txt_data_path = r'F:\Elizabeth\FuelData\TxtFiles'
     fuel_data_dictionary = txt_handler.find_data(txt_data_path)
@@ -25,7 +25,7 @@ if __name__ == "__main__":
     db_handler.xlsx_creator_ground(fuel_data_dictionary)  # pay attention to db_handler.xlsx_creator outpath
     # integrating other data to excel file manually
     fd_dict = db_handler.db_creator_ground(
-        r'F:\Elizabeth\FuelData\data_ground.xlsx')  # indata path is changed, ask RD-N1
+        r'F:\Elizabeth\FuelData\data_ground_1.xlsx')  # indata path is changed, ask RD-N1
 
     x_data, y_data = [], []
     for k, v in fd_dict.items():

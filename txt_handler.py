@@ -64,8 +64,8 @@ def find_data_ground(path):
         regular.setdefault(name_mo[0],
                            [float(t_mo[0]),  # temperature
                             8.314 / float(rg_mo[0]),  # molecular mass
+                            float(k_mo[0]), # heat capacity ratio
                             float(beta_mo[0]),
-                            float(k_mo[0]),  # heat capacity ratio
                             float(isp_mo[1])])  # specific impulse
     return regular
 

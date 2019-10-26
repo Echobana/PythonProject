@@ -1,7 +1,4 @@
 import gdf_definitions as fdf
-from fuel import FuelData
-from fuel import FuelDataGround
-import charachteristics as cta
 
 
 class TOR(object):
@@ -18,12 +15,14 @@ class TOR(object):
 
 
 class TORA(object):
-    def __init__(self, I_t, t_w, p_c, p_h, f_a):
+    def __init__(self, I_t, t_w, p_c, p_h, f_a, kappa):
         self.I_t = I_t
         self.t_w = t_w
         self.p_c = p_c
         self.p_h = p_h
         self.f_a = f_a
+        self.kappa = kappa
+        self.thrust = self.set_thrust()
 
     def set_thrust(self):
         return self.I_t / self.t_w
