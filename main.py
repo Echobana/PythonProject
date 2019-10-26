@@ -12,7 +12,7 @@ my_engine = EngineData(1000, 3, 12e6, 0.05e6, 0.05e6, 100)
 
 i_sp = cta.specific_impulse(my_engine, my_fuel)
 
-path = r'F:\Elizabeth\FuelData\data.xlsx'
+path = r'data.xlsx'
 fuel_dict = db_handler.db_creator(path)
 print(fuel_dict)
 
