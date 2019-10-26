@@ -80,4 +80,5 @@ if __name__ == "__main__":
     tor = TORA(1e6, 55, 7e6, 0, 100, 100)
 
     x = fd_dict["AGC"]
-    s = x.u()
+    x = RESF(tor, x)
+    print(x.u)
