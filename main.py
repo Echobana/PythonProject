@@ -1,9 +1,8 @@
 from engine import EngineData
-from engine import MaterialData
+from material import MaterialData
 from fuel import FuelData
 import gdf_definitions as ffd
 import txt_handler
-from area_engine import A_EngineData
 import charachteristics as cta
 
 my_fuel = FuelData(2351, 0.7e-3, 0.6, 1600, 23.4e-3, 1.18)
