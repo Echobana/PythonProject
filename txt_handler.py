@@ -1,6 +1,5 @@
 import re
 import os
-import openpyxl
 
 
 def find_data(path):
@@ -32,10 +31,10 @@ def find_data(path):
         # z_mo = z_regex.findall(v)
         name_mo = name_regex.findall(k)
         regular.setdefault(name_mo[0],
-                           [float(t_mo[0]),
-                            float(rg_mo[0]),
-                            float(isp_mo[1]),
-                            float(k_mo[0])])
+                           [float(t_mo[0]),  # temperature
+                            float(rg_mo[0]),  # R
+                            float(isp_mo[1]),  # specific_impulse
+                            float(k_mo[0])])  # heat capacity ratio
     return regular
 
 
@@ -53,3 +52,4 @@ if __name__ == "__main__":
     path = r"F:/Elizabeth/FuelData/TxtFiles"
     test_dict = find_data(path)
     print(test_dict)
+    textf_creator(test_dict)
