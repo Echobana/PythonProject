@@ -1,8 +1,10 @@
 import gdf_definitions as fdf
 from fuel import FuelData
+from fuel import FuelDataGround
+import charachteristics as cta
 
 
-class EngineData(object):
+class TOR(object):
     def __init__(self, P, t_w, p_c, p_h, p_a, kappa):
         self.p_c = p_c
         self.P = P
@@ -15,7 +17,7 @@ class EngineData(object):
         return fdf.find_la_p(fuel.k, self.p_a, self.p_c)
 
 
-class A_EngineData(object):
+class TORA(object):
     def __init__(self, I_t, t_w, p_c, p_h, f_a):
         self.I_t = I_t
         self.t_w = t_w
