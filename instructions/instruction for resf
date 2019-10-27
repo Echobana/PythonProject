@@ -1,5 +1,5 @@
 Атрибуты класса RESF:
-Атрибуты TOR, TORA, FuelData, FuelDataGround
-со спецификаторами доступа (прим. решить вопрос наследования)
+
+Атрибуты TOR, TORA, FuelData, FuelDataGround со спецификаторами доступа (прим. решить вопрос наследования)
 mass_flow - расход
-u - cкорость горения с учётом TOR или TORA
+u - cкорость горения FuelData, FuelDataGround с учётом TOR или TORA
