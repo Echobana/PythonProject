@@ -61,4 +61,40 @@ if __name__ == "__main__":
     fd_dict = db_handler.db_creator_ground_m(
         r'F:\Elizabeth\FuelData\data_ground_2.xlsx')  # indata path is changed, ask RD-N1
 
+    fig, ax = plt.subplots()
+    x_data, y_data = [], []
+    for k, v in fd_dict.items():
+        x_data.append(k)
+        y_data.append(v.i_sp)
+    ax.bar(x_data, y_data, color="#00FF7F")
+    ax.set_ylabel("Удельный импульс, $м/c$")
+
+    fig, ax = plt.subplots()
+    x_data, y_data = [], []
+    for k, v in fd_dict.items():
+        x_data.append(k)
+        y_data.append(v.z)
+    ax.bar(x_data, y_data, color="#00FF7F")
+    ax.set_ylabel("Содержание к-фазы")
+
+    cg = dict()
+    for k, v in fd_dict.items():
+        cg.setdefault(k, forms.CG(tor, v))
+
+    fig, ax = plt.subplots()
+    xm_data, ym_data = [], []
+    for k, v in cg.items():
+        xm_data.append(k)
+        ym_data.append(v.d_out)
+    barlist = plt.bar(xm_data, ym_data, color="#FF1493")
+    barlist[0].set_color('red')
+    barlist[1].set_color('orange')
+    barlist[2].set_color('yellow')
+    barlist[3].set_color('green')
+    barlist[4].set_color('blue')
+    barlist[5].set_color('purple')
+    ax.set_ylabel("Диаметр наружный, $м/c$")
+
+    plt.show()
+
 

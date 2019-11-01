@@ -31,7 +31,7 @@ class FuelDataGround(FuelData):
 class FuelDataSol(FuelDataGround):
     def __init__(self, T_c, u_1, nu, density, mu_cp, k, beta, i_sp, z, w, v):
         super().__init__(T_c, u_1, nu, density, mu_cp, k, beta, i_sp)
-        self.w = w
+        self.critic_speed = w
         self.v = v
         self.z = z
 
