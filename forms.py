@@ -30,6 +30,9 @@ class CGFE(RESF):
         super().__init__(tor, fuel)
         self.d_in = 2 * self.set_rin()
         self.d_out = 2 * self.set_rout()
+        self.b = self.set_gap_width()
+        self.length = self.set_length()
+        self.gap_length = self.set_gap_length()
 
     def set_rin(self):
         return np.sqrt(self.tor.P / (self.tor.kappa * self.fuel.i_sp * self.fuel.density * self.u * np.pi))
@@ -41,13 +44,11 @@ class CGFE(RESF):
         return (self.d_out / 2 - self.d_in / 2) / self.tor.kappa
 
     def set_length(self):
-        pass
+        return self.mass_flow * self.tor.t_w / (
+                np.pi * self.fuel.density * 0.25 * (self.d_out * self.d_out - self.d_in * self.d_in))
 
     def set_gap_length(self):
-        pass
-
-    def set_channel_length(self):
-        pass
+        return self.length - self.mass_flow / (self.fuel.density * self.u * 2 * np.pi * self.d_in / 2)
 
 
 # end
