@@ -76,7 +76,8 @@ if __name__ == "__main__":
         fuels.append(k)
         isp_data.append(v.i_sp)
         z_data.append(v.z)
-
+    print(fuels)
+    fuels = ('AGC', 'ПХА-3М', 'ПХА-4М', 'ПХА-5М', 'ARCADENE 253A', 'CYN', 'Н','ПХК-1М', 'ПХН-2М', 'RD2435')
     plot_bar(fuels, isp_data, 'Удельный импульс')
     plot_bar(fuels, z_data, 'Содержание к-фазы')
 
@@ -95,7 +96,11 @@ if __name__ == "__main__":
         tfe.setdefault(k, forms.TFE(tor, v))
         mc.setdefault(k, forms.MC(tor, v, 7))
     yplot_data = []
-    titles = ('CGFE', 'E', 'OSCCWFE', 'TFE', 'MC')
+    titles = ('Канально-щелевой заряд с плоскими торцами',
+              'Торцевой заряд',
+              'Одношечный одноканальный заряд с плоскими торцами',
+              'Телескопический заряд',
+              'Многошашечный заряд')
     for shape in shapes_tuple:
         print(shape)
         y = []
