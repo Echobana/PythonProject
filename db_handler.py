@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from fuel import FuelData
 from fuel import FuelDataGround
+from fuel import FuelDataSol
 
 
 # Excel file format:
@@ -50,6 +51,19 @@ def xlsx_creator_ground(dictionary):
     res.to_excel("data_ground.xlsx", index=False)
 
 
+def xlsx_creator_ground_m(dictionary):
+    df = pd.DataFrame(dictionary).sort_index(axis=1)
+
+    res = pd.concat([df.iloc[:1],
+                     pd.DataFrame([[""] * len(df.columns)], columns=df.columns),
+                     pd.DataFrame([[""] * len(df.columns)], columns=df.columns),
+                     pd.DataFrame([[""] * len(df.columns)], columns=df.columns),
+                     df.iloc[1:]
+                     ],
+                    ignore_index=True)
+    res.to_excel("data_ground_2.xlsx", index=False)
+
+
 def db_creator(path):
     df = pd.read_excel(path, header=None)
     df = np.array(df).T
@@ -65,6 +79,15 @@ def db_creator_ground(path):
     fuel_dict = dict()
     for i in range(len(df)):
         fuel_dict.setdefault(df[i][0], FuelDataGround(*df[i][1:]))
+    return fuel_dict
+
+
+def db_creator_ground_m(path):
+    df = pd.read_excel(path, header=None)
+    df = np.array(df).T
+    fuel_dict = dict()
+    for i in range(len(df)):
+        fuel_dict.setdefault(df[i][0], FuelDataSol(*df[i][1:]))
     return fuel_dict
 
 
