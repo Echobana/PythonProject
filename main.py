@@ -77,29 +77,24 @@ if __name__ == "__main__":
     mc = dict()
     tfe = dict()
 
+    shapes_tuple = (cgfe, osccwfe, e, mc, tfe)
+
     for k, v in fd_dict.items():
         cgfe.setdefault(k, forms.CGFE(tor, v))
         e.setdefault(k, forms.E(tor, v))
         osccwfe.setdefault(k, forms.OSCCWFE(tor, v))
         tfe.setdefault(k, forms.TFE(tor, v))
         mc.setdefault(k, forms.MC(tor, v, 7))
+    yplot_data = []
+    titles = ('CGFE', 'E', 'OSCCWFE', 'TFE', 'MC')
+    for shape in shapes_tuple:
+        print(shape)
+        y = []
+        for v in shape.values():
+            y.append(v.length)
+        yplot_data.append(y)
 
-    ym_data = []
-    for v in cgfe.values():
-        ym_data.append(v.d_out)
-    ym_data_1 = []
-    for v in cgfe.values():
-        ym_data_1.append(v.d_out)
-    # plot_bar(fuels, ym_data, 'Наружный диаметр')
-    # plot_bar(fuels, ym_data_1, 'dout')
-    # barlist = plt.bar(xm_data, ym_data, color="#FF1493")
-    # barlist[0].set_color('red')
-    # barlist[1].set_color('orange')
-    # barlist[2].set_color('yellow')
-    # barlist[3].set_color('green')
-    # barlist[4].set_color('blue')
-    # barlist[5].set_color('purple')
-    # ax.set_ylabel("Диаметр наружный, $м/c$")
-    # plt.xticks(rotation=90)
+    for i in range(len(yplot_data)):
+        plot_bar(fuels, yplot_data[i], y_title=titles[i])
 
     plt.show()
