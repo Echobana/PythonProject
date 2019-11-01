@@ -7,10 +7,14 @@ import os
 
 
 def plot_bar(x, y, y_title=''):
+    colors = ('red', 'orange', 'yellow', 'green', 'blue', 'blue', 'purple', 'black', 'grey', 'pink')
     fig_def, ax_def = plt.subplots()
-    ax_def.bar(x, y, color='pink', align='center')
+    bar_list = ax_def.bar(x, y, color='pink', align='center')
+    for i in range(len(colors)):
+        bar_list[i].set_color(colors[i])
     ax_def.set_ylabel(y_title)
     plt.xticks(rotation=90)
+    # ax_def.grid(ls='--')
 
 
 if __name__ == "__main__":
