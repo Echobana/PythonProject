@@ -15,7 +15,7 @@ class FuelData(object):
         self.R_c = R / mu_cp
         self.a = sqrt(self.k) * (2 / (self.k + 1)) ** ((self.k + 1) / (2 * (self.k - 1)))
         self.beta = sqrt(self.R_c * self.T_c) / self.a
-        self.a_cr = self.set_critic_sonic_speed()
+        self.critic_speed = self.set_critic_sonic_speed()
 
     def set_critic_sonic_speed(self):
         return sqrt(2 * self.k / (self.k + 1) * self.R_c * self.T_c)

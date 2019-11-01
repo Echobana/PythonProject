@@ -1,6 +1,7 @@
 from fuel import FuelDataGround
 import charachteristics as cta
 import gdf_definitions as fdf
+import numpy as np
 
 
 class RESF(object):
@@ -10,7 +11,8 @@ class RESF(object):
         self.mass_flow = self.set_mass_flow()
         self.u = self.combustion_speed()
         self.rho_c = self.set_chamber_density()
-        self.a_cr = self.set_critic_area()
+        self.critic_area = self.set_critic_area()
+        self.critic_diameter = self.set_critic_area()
 
     def set_mass_flow(self):
         if type(self.fuel) == FuelDataGround:
@@ -25,7 +27,10 @@ class RESF(object):
         return self.tor.p_c / (self.fuel.R_c * self.fuel.T_c)
 
     def set_critic_area(self):
-        return self.mass_flow / (self.rho_c * fdf.density(1, self.fuel.k) * self.fuel.a_cr)
+        return self.mass_flow / (self.rho_c * fdf.density(1, self.fuel.k) * self.fuel.critic_speed)
+
+    def set_critic_diameter(self):
+        return np.sqrt(4*self.critic_area/np.pi)
 
 
 if __name__ == "__main__":

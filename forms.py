@@ -1,18 +1,21 @@
 from tor import TORA
 from resf import RESF
 import db_handler
+import numpy as np
 
 
 # one single-channel checkerboard with flat ends
 class OSCCWFE(RESF):
-    def __init__(self, fuel, tor):
+    def __init__(self, tor, fuel):
         super().__init__(tor, fuel)
+        self.d_in = self.set_din()
+        self.d_out = self.set_dout()
 
     def set_din(self):
-        pass
+        return np.sqrt(self.tor.P / (self.tor.kappa * self.fuel.i_sp * self.fuel.density * self.u * np.pi))
 
     def set_dout(self):
-        pass
+        return self.d_in + self.u * self.tor.t_w
 
     def set_length(self):
         pass
@@ -76,5 +79,6 @@ if __name__ == "__main__":
     tor = TORA(1e6, 55, 7e6, 0, 100, 100)
 
     x = fd_dict["AGC"]
-    x = RESF(tor, x)
-    print(x.u)
+    # x = RESF(tor, x)
+    x = OSCCWFE(tor, x)
+    print(x.d_out)
