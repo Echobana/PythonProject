@@ -2,13 +2,13 @@ from tor import TORA
 import db_handler
 import txt_handler
 import matplotlib.pyplot as plt
-from resf import RESF
 import forms
+import os
 
 
 def plot_bar(x, y, y_title=''):
     fig_def, ax_def = plt.subplots()
-    ax_def.bar(x, y, color='#4B0082', align='center')
+    ax_def.bar(x, y, color='pink', align='center')
     ax_def.set_ylabel(y_title)
     plt.xticks(rotation=90)
 
@@ -56,11 +56,16 @@ if __name__ == "__main__":
     # ax.set_ylabel("Диаметр наружный, $м/c$")
 
     txt_data_path = r'F:\Elizabeth\FuelData\TxtFiles'
-    fuel_data_dictionary = txt_handler.find_data_ground_m(txt_data_path)
-    db_handler.xlsx_creator_ground_m(fuel_data_dictionary)  # pay attention to db_handler.xlsx_creator outpath
-    # integrating other data to excel file manually
-    fd_dict = db_handler.db_creator_ground_m(
-        r'F:\Elizabeth\FuelData\data_ground_2.xlsx')  # indata path is changed, ask RD-N1
+    xlsx_data_path = r'F:\Elizabeth\FuelData\data_ground_2.xlsx' # <---------------------------EDIT HERE
+
+    if os.path.exists(txt_data_path):
+        fd_dict = db_handler.db_creator_ground_m(xlsx_data_path)
+    else:
+        fuel_data_dictionary = txt_handler.find_data_ground_m(txt_data_path)
+        db_handler.xlsx_creator_ground_m(fuel_data_dictionary)  # pay attention to db_handler.xlsx_creator outpath
+        # integrating other data to excel file manually
+        fd_dict = db_handler.db_creator_ground_m(
+            r'F:\Elizabeth\FuelData\data_ground_2.xlsx')  # indata path is changed, ask RD-N1
 
     fuels, isp_data, z_data = [], [], []
     for k, v in fd_dict.items():
@@ -91,7 +96,7 @@ if __name__ == "__main__":
         print(shape)
         y = []
         for v in shape.values():
-            y.append(v.length)
+            y.append(v.length / v.d_out)
         yplot_data.append(y)
 
     for i in range(len(yplot_data)):

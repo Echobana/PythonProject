@@ -1,5 +1,4 @@
 from numpy import sqrt
-import charachteristics as cta
 
 R = 8.314
 
