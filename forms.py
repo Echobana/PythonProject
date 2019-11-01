@@ -69,15 +69,22 @@ class MC(RESF):
     def __init__(self, tor, fuel, n):
         super().__init__(tor, fuel)
         self.amount = n
+        self.d_in = self.set_din()
+        self.d_out = self.set_dout()
+        self.length = self.set_length()
 
     def set_din(self):
-        pass
+        return -self.u * self.tor.t_w + np.sqrt(
+            (self.u * self.tor.t_w) * (self.u * self.tor.t_w) + 2 * self.mass_flow / (
+                    self.n * np.pi * self.fuel.density * self.tor.kappa * self.u))
 
     def set_dout(self):
-        pass
+        return 3 * self.u * self.tor.t_w + np.sqrt(
+            (self.u * self.tor.t_w) * (self.u * self.tor.t_w) + 2 * self.mass_flow / (
+                    self.n * np.pi * self.fuel.density * self.tor.kappa * self.u))
 
     def set_length(self):
-        pass
+        return 0.25 * self.tor.kappa * self.d_in
 
 
 if __name__ == "__main__":
