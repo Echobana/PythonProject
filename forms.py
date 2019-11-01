@@ -8,14 +8,12 @@ import numpy as np
 class OSCCWFE(RESF):
     def __init__(self, tor, fuel):
         super().__init__(tor, fuel)
-        self.d_in = self.set_din()
-        self.d_out = self.set_dout()
 
     def set_din(self):
-        return np.sqrt(self.tor.P / (self.tor.kappa * self.fuel.i_sp * self.fuel.density * self.u * np.pi))
+        pass
 
     def set_dout(self):
-        return self.d_in + self.u * self.tor.t_w
+        pass
 
     def set_length(self):
         pass
@@ -25,23 +23,25 @@ class OSCCWFE(RESF):
 class CG(RESF):
     def __init__(self, tor, fuel):
         super().__init__(tor, fuel)
+        self.d_in = 2 * self.set_rin()
+        self.d_out = 2 * self.set_rout()
 
-    def set_din(self):
-        pass
+    def set_rin(self):
+        return np.sqrt(self.tor.P / (self.tor.kappa * self.fuel.i_sp * self.fuel.density * self.u * np.pi))
 
-    def set_dout(self):
-        pass
+    def set_rout(self):
+        return self.d_in + self.u * self.tor.t_w
+
+    def set_gap_width(self):
+        return (self.d_out / 2 - self.d_in / 2) / self.tor.kappa
 
     def set_length(self):
         pass
 
-    def set_gap_lenght(self):
+    def set_gap_length(self):
         pass
 
     def set_channel_length(self):
-        pass
-
-    def set_gap_width(self):
         pass
 
 
@@ -49,12 +49,14 @@ class CG(RESF):
 class E(RESF):
     def __init__(self, tor, fuel):
         super().__init__(tor, fuel)
+        self.length = self.set_length()
+        self.d_out = self.set_dout()
 
     def set_length(self):
-        pass
+        return self.u * self.tor.t_w
 
     def set_dout(self):
-        pass
+        return np.sqrt((4 * self.fuel_volume) / (np.pi * self.length))
 
 
 # multicheckers
@@ -78,7 +80,9 @@ if __name__ == "__main__":
         r'F:\Elizabeth\FuelData\data_ground_1.xlsx')  # indata path is changed, ask RD-N1
     tor = TORA(1e6, 55, 7e6, 0, 100, 100)
 
-    x = fd_dict["AGC"]
+    fuel = fd_dict["AGC"]
     # x = RESF(tor, x)
-    x = OSCCWFE(tor, x)
-    print(x.d_out)
+    x = E(tor, fuel)
+    print(x.critic_area)
+    print(x.critic_diameter)
+    print(x.length)

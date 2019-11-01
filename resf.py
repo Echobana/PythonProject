@@ -12,7 +12,9 @@ class RESF(object):
         self.u = self.combustion_speed()
         self.rho_c = self.set_chamber_density()
         self.critic_area = self.set_critic_area()
-        self.critic_diameter = self.set_critic_area()
+        self.critic_diameter = self.set_critic_diameter()
+        self.fuel_mass = self.set_fuel_mass()
+        self.fuel_volume = self.set_fuel_volume()
 
     def set_mass_flow(self):
         if type(self.fuel) == FuelDataGround:
@@ -30,7 +32,13 @@ class RESF(object):
         return self.mass_flow / (self.rho_c * fdf.density(1, self.fuel.k) * self.fuel.critic_speed)
 
     def set_critic_diameter(self):
-        return np.sqrt(4*self.critic_area/np.pi)
+        return np.sqrt(4 * self.critic_area / np.pi)
+
+    def set_fuel_mass(self):
+        return self.mass_flow * self.tor.t_w
+
+    def set_fuel_volume(self):
+        return self.fuel_mass / self.fuel.density
 
 
 if __name__ == "__main__":

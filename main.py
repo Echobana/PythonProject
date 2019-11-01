@@ -34,6 +34,4 @@ if __name__ == "__main__":
 
     # plot_bar(x_data, y_data)
 
-    a = RESF(tor, fd_dict['AGC'])
-    print(a.fuel.a_cr)
 
