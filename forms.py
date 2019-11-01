@@ -25,7 +25,7 @@ class OSCCWFE(RESF):
 
 
 # channel gap
-class CG(RESF):
+class CGFE(RESF):
     def __init__(self, tor, fuel):
         super().__init__(tor, fuel)
         self.d_in = 2 * self.set_rin()
@@ -76,25 +76,46 @@ class MC(RESF):
     def set_din(self):
         return -self.u * self.tor.t_w + np.sqrt(
             (self.u * self.tor.t_w) * (self.u * self.tor.t_w) + 2 * self.mass_flow / (
-                    self.n * np.pi * self.fuel.density * self.tor.kappa * self.u))
+                    self.amount * np.pi * self.fuel.density * self.tor.kappa * self.u))
 
     def set_dout(self):
         return 3 * self.u * self.tor.t_w + np.sqrt(
             (self.u * self.tor.t_w) * (self.u * self.tor.t_w) + 2 * self.mass_flow / (
-                    self.n * np.pi * self.fuel.density * self.tor.kappa * self.u))
+                    self.amount * np.pi * self.fuel.density * self.tor.kappa * self.u))
 
     def set_length(self):
         return 0.25 * self.tor.kappa * self.d_in
 
 
-if __name__ == "__main__":
-    fd_dict = db_handler.db_creator_ground(
-        r'F:\Elizabeth\FuelData\data_ground_1.xlsx')  # indata path is changed, ask RD-N1
-    tor = TORA(1e6, 55, 7e6, 0, 100, 100)
+class TFE(RESF):
+    def __init__(self, tor, fuel):
+        super().__init__(tor, fuel)
+        self.d_checker = self.set_d_checker()
+        self.d_in = self.set_din()
+        self.d_out = self.set_dout()
+        self.length = self.set_length()
 
-    fuel = fd_dict["AGC"]
-    # x = RESF(tor, x)
-    x = E(tor, fuel)
-    print(x.critic_area)
-    print(x.critic_diameter)
-    print(x.length)
+    def set_d_checker(self):
+        return 2 * self.u * self.tor.t_w
+
+    def set_din(self):
+        return np.sqrt((2 * self.u * self.tor.t_w) * (2 * self.u * self.tor.t_w) + 4 * self.mass_flow / (
+                self.u * self.fuel.density * self.tor.kappa * np.pi))
+
+    def set_dout(self):
+        return 2 * self.u * self.tor.t_w + self.d_in
+
+    def set_length(self):
+        return self.mass_flow / (self.fuel.density * np.pi * self.u * self.d_out)
+
+    if __name__ == "__main__":
+        fd_dict = db_handler.db_creator_ground(
+            r'F:\Elizabeth\FuelData\data_ground_1.xlsx')  # indata path is changed, ask RD-N1
+        tor = TORA(1e6, 55, 7e6, 0, 100, 100)
+
+        fuel = fd_dict["AGC"]
+        # x = RESF(tor, x)
+        x = E(tor, fuel)
+        print(x.critic_area)
+        print(x.critic_diameter)
+        print(x.length)

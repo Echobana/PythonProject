@@ -71,21 +71,27 @@ if __name__ == "__main__":
     plot_bar(fuels, isp_data, 'Удельный импульс')
     plot_bar(fuels, z_data, 'Содержание к-фазы')
 
-    cg = dict()
+    cgfe = dict()
     osccwfe = dict()
     e = dict()
     mc = dict()
+    tfe = dict()
 
     for k, v in fd_dict.items():
-        cg.setdefault(k, forms.CG(tor, v))
+        cgfe.setdefault(k, forms.CGFE(tor, v))
         e.setdefault(k, forms.E(tor, v))
         osccwfe.setdefault(k, forms.OSCCWFE(tor, v))
+        tfe.setdefault(k, forms.TFE(tor, v))
         mc.setdefault(k, forms.MC(tor, v, 7))
 
     ym_data = []
-    for v in cg.values():
+    for v in cgfe.values():
         ym_data.append(v.d_out)
-    plot_bar(fuels, ym_data, 'Наружный диаметр')
+    ym_data_1 = []
+    for v in cgfe.values():
+        ym_data_1.append(v.d_out)
+    # plot_bar(fuels, ym_data, 'Наружный диаметр')
+    # plot_bar(fuels, ym_data_1, 'dout')
     # barlist = plt.bar(xm_data, ym_data, color="#FF1493")
     # barlist[0].set_color('red')
     # barlist[1].set_color('orange')
