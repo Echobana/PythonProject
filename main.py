@@ -60,7 +60,7 @@ if __name__ == "__main__":
     # ax.set_ylabel("Диаметр наружный, $м/c$")
 
     txt_data_path = r'F:\Elizabeth\FuelData\TxtFiles'
-    xlsx_data_path = r'F:\Elizabeth\FuelData\data_ground_2.xlsx' # <---------------------------EDIT HERE
+    xlsx_data_path = r'F:\Elizabeth\FuelData\data_ground_2.xlsx'  # <---------------------------EDIT HERE
 
     if os.path.exists(txt_data_path):
         fd_dict = db_handler.db_creator_ground_m(xlsx_data_path)
