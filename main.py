@@ -2,6 +2,7 @@ from tor import TORA
 import db_handler
 import txt_handler
 import matplotlib.pyplot as plt
+from resf import RESF
 
 
 def plot_bar(x, y):
@@ -31,5 +32,8 @@ if __name__ == "__main__":
         x_data.append(k)
         y_data.append(v.i_sp)
 
-    plot_bar(x_data, y_data)
+    # plot_bar(x_data, y_data)
+
+    a = RESF(tor, fd_dict['AGC'])
+    print(a.fuel.a_cr)
 
