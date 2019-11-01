@@ -109,10 +109,10 @@ def find_data_ground_m(path):
                             8.314 / float(rg_mo[0]),  # molecular mass
                             float(k_mo[0]),  # heat capacity ratio
                             float(beta_mo[0]),
-                            float(isp_mo[1]),
-                            float(z_mo[0]),
-                            float(w_mo[1]),
-                            float(v_mo[0])])  # specific impulse
+                            float(isp_mo[1]),  # specific impulse
+                            float(z_mo[0]),  # c-phase
+                            float(w_mo[1]),  # critic sonic speed
+                            float(v_mo[0])])  # specific volume
     return regular
 
 
