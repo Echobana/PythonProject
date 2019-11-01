@@ -68,6 +68,7 @@ if __name__ == "__main__":
         y_data.append(v.i_sp)
     ax.bar(x_data, y_data, color="#00FF7F")
     ax.set_ylabel("Удельный импульс, $м/c$")
+    plt.xticks(rotation=90)
 
     fig, ax = plt.subplots()
     x_data, y_data = [], []
@@ -76,6 +77,7 @@ if __name__ == "__main__":
         y_data.append(v.z)
     ax.bar(x_data, y_data, color="#00FF7F")
     ax.set_ylabel("Содержание к-фазы")
+    plt.xticks(rotation=90)
 
     cg = dict()
     for k, v in fd_dict.items():
@@ -94,6 +96,7 @@ if __name__ == "__main__":
     barlist[4].set_color('blue')
     barlist[5].set_color('purple')
     ax.set_ylabel("Диаметр наружный, $м/c$")
+    plt.xticks(rotation=90)
 
     plt.show()
 
