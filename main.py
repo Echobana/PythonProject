@@ -7,13 +7,13 @@ import os
 
 
 def plot_bar(x, y, y_title=''):
-    colors = ('red', 'orange', 'yellow', 'green', 'blue', 'blue', 'purple', 'black', 'grey', 'pink')
+    colors = ('#FF0000', '#7B68EE', '#00FF00', '#00FFFF', '#FF00FF', '#00FA9A', '#FFD700', '#DA70D6', '#000080', '#00CED1')
     fig_def, ax_def = plt.subplots()
     bar_list = ax_def.bar(x, y, color='pink', align='center')
     for i in range(len(colors)):
         bar_list[i].set_color(colors[i])
     ax_def.set_ylabel(y_title)
-    plt.xticks(rotation=90)
+    plt.xticks(rotation=30)
     # ax_def.grid(ls='--')
 
 
@@ -76,7 +76,7 @@ if __name__ == "__main__":
         fuels.append(k)
         isp_data.append(v.i_sp)
         z_data.append(v.z)
-    print(fuels)
+
     fuels = ('AGC', 'ПХА-3М', 'ПХА-4М', 'ПХА-5М', 'ARCADENE 253A', 'CYN', 'Н','ПХК-1М', 'ПХН-2М', 'RD2435')
     plot_bar(fuels, isp_data, 'Удельный импульс')
     plot_bar(fuels, z_data, 'Содержание к-фазы')
@@ -102,7 +102,6 @@ if __name__ == "__main__":
               'Телескопический заряд',
               'Многошашечный заряд')
     for shape in shapes_tuple:
-        print(shape)
         y = []
         for v in shape.values():
             y.append(v.length / v.d_out)
