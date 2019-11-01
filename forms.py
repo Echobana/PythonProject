@@ -113,10 +113,3 @@ class TFE(RESF):
         fd_dict = db_handler.db_creator_ground(
             r'F:\Elizabeth\FuelData\data_ground_1.xlsx')  # indata path is changed, ask RD-N1
         tor = TORA(1e6, 55, 7e6, 0, 100, 100)
-
-        fuel = fd_dict["AGC"]
-        # x = RESF(tor, x)
-        x = E(tor, fuel)
-        print(x.critic_area)
-        print(x.critic_diameter)
-        print(x.length)

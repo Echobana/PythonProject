@@ -18,6 +18,7 @@ def plot_bar(x, y, y_title=''):
 
 
 if __name__ == "__main__":
+    # thrust impulse, time, chamber pressure, atmosphere pressure, f_a, Pobedonostsev criteria
     tor = TORA(1e6, 55, 7e6, 0, 100, 100)
 
     # txt_data_path = r'F:\Elizabeth\FuelData\TxtFiles'
@@ -95,12 +96,15 @@ if __name__ == "__main__":
         osccwfe.setdefault(k, forms.OSCCWFE(tor, v))
         tfe.setdefault(k, forms.TFE(tor, v))
         mc.setdefault(k, forms.MC(tor, v, 7))
+
     yplot_data = []
+
     titles = ('Канально-щелевой заряд с плоскими торцами',
               'Торцевой заряд',
               'Одношечный одноканальный заряд с плоскими торцами',
               'Телескопический заряд',
               'Многошашечный заряд')
+
     for shape in shapes_tuple:
         y = []
         for v in shape.values():
