@@ -8,15 +8,20 @@ import numpy as np
 class OSCCWFE(RESF):
     def __init__(self, tor, fuel):
         super().__init__(tor, fuel)
+        self.d_in = self.set_din()
+        self.d_out = self.set_dout()
+        self.length = self.set_length()
 
     def set_din(self):
-        pass
+        return -self.u * self.tor.t_w + np.sqrt(
+            (self.u * self.tor.t_w) * (self.u * self.tor.t_w) + 2 * self.mass_flow / (
+                    np.pi * self.fuel.density * self.tor.kappa * self.u))
 
     def set_dout(self):
-        pass
+        return self.d_in + 4 * self.u * self.tor.t_w
 
     def set_length(self):
-        pass
+        return 0.25 * self.tor.kappa * self.d_in
 
 
 # channel gap

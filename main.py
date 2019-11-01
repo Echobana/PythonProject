@@ -6,10 +6,11 @@ from resf import RESF
 import forms
 
 
-def plot_bar(x, y):
-    fig, ax = plt.subplots()
-    ax.bar(x, y, color='#4B0082', align='center')
-    plt.show()
+def plot_bar(x, y, y_title=''):
+    fig_def, ax_def = plt.subplots()
+    ax_def.bar(x, y, color='#4B0082', align='center')
+    ax_def.set_ylabel(y_title)
+    plt.xticks(rotation=90)
 
 
 if __name__ == "__main__":
@@ -61,43 +62,38 @@ if __name__ == "__main__":
     fd_dict = db_handler.db_creator_ground_m(
         r'F:\Elizabeth\FuelData\data_ground_2.xlsx')  # indata path is changed, ask RD-N1
 
-    fig, ax = plt.subplots()
-    x_data, y_data = [], []
+    fuels, isp_data, z_data = [], [], []
     for k, v in fd_dict.items():
-        x_data.append(k)
-        y_data.append(v.i_sp)
-    ax.bar(x_data, y_data, color="#00FF7F")
-    ax.set_ylabel("Удельный импульс, $м/c$")
-    plt.xticks(rotation=90)
+        fuels.append(k)
+        isp_data.append(v.i_sp)
+        z_data.append(v.z)
 
-    fig, ax = plt.subplots()
-    x_data, y_data = [], []
-    for k, v in fd_dict.items():
-        x_data.append(k)
-        y_data.append(v.z)
-    ax.bar(x_data, y_data, color="#00FF7F")
-    ax.set_ylabel("Содержание к-фазы")
-    plt.xticks(rotation=90)
+    plot_bar(fuels, isp_data, 'Удельный импульс')
+    plot_bar(fuels, z_data, 'Содержание к-фазы')
 
     cg = dict()
+    osccwfe = dict()
+    e = dict()
+    mc = dict()
+
     for k, v in fd_dict.items():
         cg.setdefault(k, forms.CG(tor, v))
+        e.setdefault(k, forms.E(tor, v))
+        osccwfe.setdefault(k, forms.OSCCWFE(tor, v))
+        mc.setdefault(k, forms.MC(tor, v, 7))
 
-    fig, ax = plt.subplots()
-    xm_data, ym_data = [], []
-    for k, v in cg.items():
-        xm_data.append(k)
+    ym_data = []
+    for v in cg.values():
         ym_data.append(v.d_out)
-    barlist = plt.bar(xm_data, ym_data, color="#FF1493")
-    barlist[0].set_color('red')
-    barlist[1].set_color('orange')
-    barlist[2].set_color('yellow')
-    barlist[3].set_color('green')
-    barlist[4].set_color('blue')
-    barlist[5].set_color('purple')
-    ax.set_ylabel("Диаметр наружный, $м/c$")
-    plt.xticks(rotation=90)
+    plot_bar(fuels, ym_data, 'Наружный диаметр')
+    # barlist = plt.bar(xm_data, ym_data, color="#FF1493")
+    # barlist[0].set_color('red')
+    # barlist[1].set_color('orange')
+    # barlist[2].set_color('yellow')
+    # barlist[3].set_color('green')
+    # barlist[4].set_color('blue')
+    # barlist[5].set_color('purple')
+    # ax.set_ylabel("Диаметр наружный, $м/c$")
+    # plt.xticks(rotation=90)
 
     plt.show()
-
-
