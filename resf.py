@@ -33,7 +33,7 @@ class RESF(object):
 
     def set_chamber_density(self):
         if type(self.fuel) == FuelDataSol:
-            return 1/self.fuel.v
+            return 1 / self.fuel.v
         else:
             return self.tor.p_c / (self.fuel.R_c * self.fuel.T_c)
 
@@ -48,6 +48,10 @@ class RESF(object):
 
     def set_fuel_volume(self):
         return self.fuel_mass / self.fuel.density
+
+    def set_combustion_area(self):
+        return ((self.tor.p_c ** (1 - self.fuel.nu)) * self.critic_area) / (
+                self.fuel.density * self.fuel.u_1 * self.fuel.beta / (98066.5 ** self.fuel.nu))
 
 
 if __name__ == "__main__":

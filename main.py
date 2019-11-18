@@ -14,7 +14,7 @@ def plot_bar(x, y, y_title=''):
         bar_list[i].set_color(colors[i])
     ax_def.set_ylabel(y_title)
     plt.xticks(rotation=30)
-    # ax_def.grid(ls='--')
+    ax_def.grid(ls='--')
 
 
 if __name__ == "__main__":
@@ -108,7 +108,7 @@ if __name__ == "__main__":
     for shape in shapes_tuple:
         y = []
         for v in shape.values():
-            y.append(v.length / v.d_out)
+            y.append(v.length/v.d_out)
         yplot_data.append(y)
 
     for i in range(len(yplot_data)):

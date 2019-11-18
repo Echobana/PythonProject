@@ -55,6 +55,4 @@ def find_la_q(k, f_cr, f_a):
 
 
 if __name__ == "__main__":
-    print(a_gdf(1.19))  # find A(k)
-    print(pressure(2.43, 1.18))  # find pi(lambda, k)
-    print(find_la_q(1.18, 1, 100))
+    print(density(1, 1.14))
