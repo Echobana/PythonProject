@@ -116,5 +116,7 @@ if __name__ == "__main__":
     tor = TORA(1e6, 55, 7e6, 0, 100, 100)
     fuel = fd_dict['AGC']
 
-    rocket = MC(tor, fuel)
-    print(rocket.set_length())
+    rocket = OSCCWFE(tor, fuel)
+    # print(rocket.fuel.u_1 * ((rocket.tor.p_c / 98066.5) ** rocket.fuel.nu))
+    print(rocket.combustion_area)
+    print(rocket.d_in*1e3)

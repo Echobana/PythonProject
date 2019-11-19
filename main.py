@@ -7,7 +7,8 @@ import os
 
 
 def plot_bar(x, y, y_title=''):
-    colors = ('#FF0000', '#7B68EE', '#00FF00', '#00FFFF', '#FF00FF', '#00FA9A', '#FFD700', '#DA70D6', '#000080', '#00CED1')
+    colors = (
+    '#FF0000', '#7B68EE', '#00FF00', '#00FFFF', '#FF00FF', '#00FA9A', '#FFD700', '#DA70D6', '#000080', '#00CED1')
     fig_def, ax_def = plt.subplots()
     bar_list = ax_def.bar(x, y, color='pink', align='center')
     for i in range(len(colors)):
@@ -15,6 +16,22 @@ def plot_bar(x, y, y_title=''):
     ax_def.set_ylabel(y_title)
     plt.xticks(rotation=30)
     ax_def.grid(ls='--')
+
+
+def plot_bar_double(x, y1, y2, y_title=''):
+    colors = (
+    '#FF0000', '#7B68EE', '#00FF00', '#00FFFF', '#FF00FF', '#00FA9A', '#FFD700', '#DA70D6', '#000080', '#00CED1')
+    fig_def, (ax_def_left, ax_def_right) = plt.subplots(nrows=2)
+    bar_list_left = ax_def_left.bar(x, y1, align='center', label="left")
+    bar_list_right = ax_def_right.bar(x, y2, align='center')
+    for i in range(len(colors)):
+        bar_list_left[i].set_color(colors[i])
+        bar_list_right[i].set_color(colors[i])
+    ax_def_left.grid(ls="--")
+    ax_def_right.grid(ls="--")
+    ax_def_left.set_title("Наружный диаметр")
+    ax_def_right.set_title("Удлинение")
+    fig_def.suptitle(y_title)
 
 
 if __name__ == "__main__":
@@ -78,9 +95,9 @@ if __name__ == "__main__":
         isp_data.append(v.i_sp)
         z_data.append(v.z)
 
-    fuels = ('AGC', 'ПХА-3М', 'ПХА-4М', 'ПХА-5М', 'ARCADENE 253A', 'CYN', 'Н','ПХК-1М', 'ПХН-2М', 'RD2435')
-    plot_bar(fuels, isp_data, 'Удельный импульс')
-    plot_bar(fuels, z_data, 'Содержание к-фазы')
+    fuels = ('AGC', 'ПХА-3М', 'ПХА-4М', 'ПХА-5М', 'ARCADENE 253A', 'CYN', 'Н', 'ПХК-1М', 'ПХН-2М', 'RD2435')
+    # plot_bar(fuels, isp_data, 'Удельный импульс')
+    # plot_bar(fuels, z_data, 'Содержание к-фазы')
 
     cgfe = dict()
     osccwfe = dict()
@@ -97,21 +114,30 @@ if __name__ == "__main__":
         tfe.setdefault(k, forms.TFE(tor, v))
         mc.setdefault(k, forms.MC(tor, v, 7))
 
-    yplot_data = []
+    yplot_data_elongation = []
+    yplot_data_d = []
 
     titles = ('Канально-щелевой заряд с плоскими торцами',
-              'Торцевой заряд',
               'Одношечный одноканальный заряд с плоскими торцами',
-              'Телескопический заряд',
-              'Многошашечный заряд')
+              'Торцевой заряд',
+              'Многошашечный заряд',
+              'Телескопический заряд'
+              )
 
     for shape in shapes_tuple:
         y = []
+        y_elongation = []
+        y_d_out = []
         for v in shape.values():
-            y.append(v.length/v.d_out)
-        yplot_data.append(y)
+            y_elongation.append(v.length / v.d_out)
+            y_d_out.append(v.d_out)
+            # y.append(v.fuel_mass)
+        yplot_data_elongation.append(y_elongation)
+        yplot_data_d.append(y_d_out)
 
-    for i in range(len(yplot_data)):
-        plot_bar(fuels, yplot_data[i], y_title=titles[i])
+    for i in range(len(yplot_data_elongation)):
+        plot_bar(fuels, yplot_data_elongation[i], y_title=titles[i])
+    # for i in range(len(yplot_data_rate)):
+    #     plot_bar_double(fuels, yplot_data_d[i], yplot_data_rate[i], y_title=titles[i])
 
     plt.show()
